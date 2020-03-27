@@ -1,23 +1,47 @@
 <?php
 namespace Inc\Pages;
 
-class Admin
+use \Inc\Base\BaseController;
+use \Inc\Api\SettingsApi;
+class Admin extends BaseController
 {
-    public function register() { 
-        //add_action( 'admin_enqueue_scripts', array( $this , 'enqueue' ) );
+    public $settings;
 
-        add_action( 'admin_menu', array( $this, 'add_admin_pages') );
+    public $admin_pages = array();
 
-        //add_filter( "plugin_action_links_$this->plugin", array( $this, 'settings_link') );
+    public function __construct()
+    {
+        $this->settings = new SettingsApi();
     }
 
-    
-
-    public function add_admin_pages() {
-        add_menu_page('Inpsyde Plugin', 'Inpsyde', 'manage_options', 'inpsyde_plugin', array( $this, 'admin_index'), 'dashicons-admin-plugins', 110);
-    }
-
-    public function admin_index() {
-        require_once PLUGIN_PATH . 'templates/admin.php';
+    public function register() {
+        //add_action( 'admin_menu', array( $this, 'add_admin_pages') );
+        $pages = [
+            [
+                'page_title' => 'Inpsyde Plugin',
+                'menu_title' => 'Inpsyde',
+                'capability' => 'manage_options',
+                'menu_slug'  => 'inpsyde_plugin',
+                'callback'   => function() { 
+                    echo '  <h1>Inpsyde plugin</h1>
+                            <div>
+                            <p>This plugin is now active.<br>
+                            It automatically initialized a script which calls API and creating table with data returned from json object.
+                            </p>
+                            </div>'; },
+                'icon_url'   => 'dashicons-store',
+                'position'   => 110
+            ]
+            // [
+            //     'page_title' => 'Test Plugin',
+            //     'menu_title' => 'Test',
+            //     'capability' => 'manage_options',
+            //     'menu_slug'  => 'test_plugin',
+            //     'callback'   => function() { echo '<h1>External</h1>'; },
+            //     'icon_url'   => 'dashicons-external',
+            //     'position'   => 9
+            // ]
+        ];
+        $this->settings->addPages( $pages )->register();
     }
 }

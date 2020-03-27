@@ -5,19 +5,17 @@
 
  namespace Inc\Base;
  
- /**
-  * 
-  */
- class Enqueue
+ class Enqueue extends BaseController
  {
-     public function register() {
-        add_action ('admin_enqueue_scripts', array( $this, 'enqueue' ) );
-     }
+    public function register() {
+        add_action ('wp_enqueue_scripts', array( $this, 'enqueue' ) );
+    }
 
-     function enqueue(){
-         //enqueue all scripts
-        wp_enqueue_style( 'pluginstyle', PLUGIN_URL . ( '/assets/css/style.css' ) );
-        wp_enqueue_script( 'pluginscript', PLUGIN_URL . ( '/assets/js/jquery-3.4.1.min.js' ) );
-        wp_enqueue_script( 'plugincustomscript', PLUGIN_URL . ( '/assets/js/main.js' ) );
-     }
+    function enqueue(){
+        //enqueue all scripts
+        wp_enqueue_style( 'pluginStyle', $this->plugin_url . ( '/assets/css/style.css' ) );
+        wp_enqueue_script( 'pluginScript', $this->plugin_url . ( '/assets/js/jquery-3.4.1.min.js' ) );
+        wp_enqueue_script( 'pluginCustomScript', $this->plugin_url . ( '/assets/js/main.js' ) );
+    }
+  
  }
