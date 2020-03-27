@@ -47,7 +47,6 @@ function deactivate_inpsyde_plugin() {
 
 register_deactivation_hook( __FILE__, 'deactivate_inpsyde_plugin');
 
-
 /**
  * Initialize all the core cclasses of the plugin
  */

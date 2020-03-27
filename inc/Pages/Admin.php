@@ -22,19 +22,25 @@ class Admin extends BaseController
                 'menu_title' => 'Inpsyde',
                 'capability' => 'manage_options',
                 'menu_slug'  => 'inpsyde_plugin',
-                'callback'   => function() { echo '<h1>Inpsyde plugin</h1>'; },
+                'callback'   => function() { 
+                    echo '  <h1>Inpsyde plugin</h1>
+                            <div>
+                            <p>This plugin is now active.<br>
+                            It automatically initialized a script which calls API and creating table with data returned from json object.
+                            </p>
+                            </div>'; },
                 'icon_url'   => 'dashicons-store',
                 'position'   => 110
-            ],
-            [
-                'page_title' => 'Test Plugin',
-                'menu_title' => 'Test',
-                'capability' => 'manage_options',
-                'menu_slug'  => 'test_plugin',
-                'callback'   => function() { echo '<h1>External</h1>'; },
-                'icon_url'   => 'dashicons-external',
-                'position'   => 9
             ]
+            // [
+            //     'page_title' => 'Test Plugin',
+            //     'menu_title' => 'Test',
+            //     'capability' => 'manage_options',
+            //     'menu_slug'  => 'test_plugin',
+            //     'callback'   => function() { echo '<h1>External</h1>'; },
+            //     'icon_url'   => 'dashicons-external',
+            //     'position'   => 9
+            // ]
         ];
         $this->settings->addPages( $pages )->register();
     }
